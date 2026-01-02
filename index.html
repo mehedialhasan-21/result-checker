@@ -1,891 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Result Portal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #4361ee;
-            --primary-dark: #3a56d4;
-            --secondary: #7209b7;
-            --success: #4cc9f0;
-            --warning: #f72585;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --glass: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akota Kinder Garten Result Checker</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: var(--light);
-            min-height: 100vh;
-            padding: 2px;
-            position: relative;
-            overflow-x: hidden;
-        }
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.1) 0%, transparent 50%);
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Header Styles */
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-top: 20px;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .logo {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            box-shadow: 0 10px 30px rgba(67, 97, 238, 0.3);
-        }
-
-        .logo i {
-            font-size: 36px;
-        }
-
-        .header h1 {
-            font-weight: 800;
-            font-size: 2.8rem;
-            background: linear-gradient(to right, #fff, #a5b4fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* Main Content */
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        @media (max-width: 992px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Glass Panel */
-        .glass-panel {
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            padding: 3px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .glass-panel:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
-        }
-
-        .panel-title {
-            font-weight: 700;
-            font-size: 1.5rem;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-        }
-
-        .panel-title i {
-            margin-right: 12px;
-            color: var(--success);
-        }
-
-        /* Input Styles */
-        .input-group-modern {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .input-group-modern input,
-        .input-group-modern select {
-            width: 100%;
-            padding: 8px 16px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
-            color: var(--light);
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s ease;
-        }
-
-        .input-group-modern input:focus,
-        .input-group-modern select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .input-group-modern label {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 16px;
-            pointer-events: none;
-            transition: all 0.3s ease;
-            padding: 0 5px;
-            background: transparent;
-        }
-
-        .input-group-modern input:focus + label,
-        .input-group-modern input:not(:placeholder-shown) + label,
-        .input-group-modern select:focus + label,
-        .input-group-modern select:valid + label {
-            top: 0;
-            font-size: 14px;
-            color: var(--success);
-            background: rgba(26, 26, 46, 0.9);
-        }
-
-        /* Button Styles */
-        .btn-modern {
-            width: 100%;
-            padding: 18px;
-            border: none;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 18px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 10px;
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
-        }
-
-        .btn-modern:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-        }
-
-        .btn-modern:active {
-            transform: translateY(-1px);
-        }
-
-        .btn-modern i {
-            margin-right: 10px;
-            font-size: 20px;
-        }
-
-        /* Result Panel */
-        .result-panel {
-            display: none;
-        }
-
-        .result-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .student-info h3 {
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .student-info p {
-            opacity: 0.8;
-        }
-
-        .status-badge {
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .status-pass {
-            background: rgba(76, 201, 240, 0.2);
-            color: var(--success);
-            border: 1px solid rgba(76, 201, 240, 0.4);
-        }
-
-        .status-fail {
-            background: rgba(247, 37, 133, 0.2);
-            color: var(--warning);
-            border: 1px solid rgba(247, 37, 133, 0.4);
-        }
-
-        /* Marks Table */
-        .marks-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin: 25px 0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .marks-table thead {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-        }
-
-        .marks-table th {
-            padding: 8px 5px;
-            text-align: center;
-            font-weight: 600;
-            color: white;
-        }
-
-        .marks-table td {
-            padding: 16px 15px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .marks-table tbody tr:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .subject-cell {
-            text-align: left !important;
-            font-weight: 600;
-        }
-
-        /* Performance Summary */
-        .performance-summary {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .performance-summary {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .metric-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .metric-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .metric-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .metric-label {
-            font-size: 14px;
-            opacity: 0.7;
-        }
-
-        .cgpa {
-            color: var(--success);
-        }
-
-        .position {
-            color: #ffb347;
-        }
-
-        .total-marks {
-            color: #a5b4fc;
-        }
-
-        .percentage {
-            color: #f72585;
-        }
-
-        /* AI Summary */
-        .ai-summary {
-            margin-top: 30px;
-            padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            border-left: 4px solid var(--success);
-        }
-
-        .ai-summary h5 {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            color: var(--success);
-        }
-
-        .ai-summary h5 i {
-            margin-right: 10px;
-        }
-
-        .ai-summary-content {
-            line-height: 1.6;
-            opacity: 0.9;
-        }
-
-        /* Loading Animation */
-        .loader-container {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid var(--success);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .loader-text {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 15px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .action-btn i {
-            margin-right: 8px;
-        }
-
-        .print-btn {
-            background: rgba(76, 201, 240, 0.2);
-            color: var(--success);
-            border: 1px solid rgba(76, 201, 240, 0.4);
-        }
-
-        .print-btn:hover {
-            background: rgba(76, 201, 240, 0.3);
-        }
-
-        .download-btn {
-            background: rgba(114, 9, 183, 0.2);
-            color: #c77dff;
-            border: 1px solid rgba(114, 9, 183, 0.4);
-        }
-
-        .download-btn:hover {
-            background: rgba(114, 9, 183, 0.3);
-        }
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            opacity: 0.7;
-            font-size: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2.2rem;
-            }
-            
-            .glass-panel {
-                padding: 20px;
-            }
-            
-            .performance-summary {
-                grid-template-columns: 1fr;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            
-            .result-panel, .result-panel * {
-                visibility: visible;
-            }
-            
-            .result-panel {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                background: white;
-                color: black;
-            }
-            
-            .action-buttons, .ai-summary, .footer {
-                display: none;
-            }
-        }
-    </style>
+<!-- Custom CSS -->
+<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <div class="logo-container">
-                <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
-                </div>
-                <div>
-                    <h1>Digital Result Portal</h1>
-                    <p>Secure, Smart & Advanced Academic Result Management System</p>
-                </div>
-            </div>
-        </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Input Panel -->
-            <div class="glass-panel">
-                <h3 class="panel-title"><i class="fas fa-search"></i> Student Information</h3>
-                
-                <div class="input-group-modern">
-                    <input type="text" id="roll" placeholder=" " required>
-                    <label for="roll"><i class="fas fa-id-card"></i> Roll Number</label>
-                </div>
-                
-                <div class="input-group-modern">
-                    <select id="classSelect" required>
-                        <option value="" disabled selected> </option>
-                        <option value="Play">Play Group</option>
-                        <option value="KG">Kindergarten</option>
-                        <option value="1">Class 1</option>
-                        <option value="2">Class 2</option>
-                        <option value="3">Class 3</option>
-                        <option value="4">Class 4</option>
-                        <option value="5">Class 5</option>
-                    </select>
-                    <label for="classSelect"><i class="fas fa-school"></i> Class</label>
-                </div>
-                
-                <div class="input-group-modern">
-                    <select id="termSelect" required>
-                        <option value="" disabled selected> </option>
-                        <option value="1st">First Term</option>
-                        <option value="2nd">Second Term</option>
-                        <option value="Final">Final Examination</option>
-                    </select>
-                    <label for="termSelect"><i class="fas fa-calendar-alt"></i> Exam Term</label>
-                </div>
-                
-                <button class="btn-modern" onclick="checkResult()">
-                    <i class="fas fa-file-alt"></i> Check Result
-                </button>
-            </div>
+<div class="container d-flex justify-content-center align-items-center">
 
-            <!-- Result Panel -->
-            <div class="glass-panel result-panel" id="resultPanel">
-                <div class="loader-container" id="loader">
-                    <div class="loader"></div>
-                    <p class="loader-text">Fetching result data...</p>
-                </div>
-                
-                <div id="resultContent" style="display: none;">
-                    <div class="result-header">
-                        <div class="student-info">
-                            <h3 id="studentName">-</h3>
-                            <p id="studentDetails">Class: - | Term: - | Roll: -</p>
-                        </div>
-                        <div class="status-badge" id="statusBadge">-</div>
-                    </div>
-                    
-                    <!-- Marks Table -->
-                    <div id="marksTableContainer"></div>
-                    
-                    <!-- Performance Summary -->
-                    <div class="performance-summary" id="performanceSummary"></div>
-                    
-                    <!-- AI Summary -->
-                    <div class="ai-summary">
-                        <h5><i class="fas fa-robot"></i> AI Performance Analysis</h5>
-                        <div class="ai-summary-content" id="aiSummary">
-                            Enter your details and check result to get personalized AI analysis.
-                        </div>
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="action-buttons">
-                        <button class="action-btn print-btn" onclick="window.print()">
-                            <i class="fas fa-print"></i> Print Result
-                        </button>
-                        <button class="action-btn download-btn" onclick="downloadResult()">
-                            <i class="fas fa-download"></i> Download PDF
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div class="result-card">
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>© 2023 Akota Kinder Garden and Pre-Cadet School. All rights reserved.</p>
-            <p>This result portal uses advanced encryption to protect student data.</p>
-        </div>
+    <!-- ===== HEADER ===== -->
+    <div class="text-center mb-2">
+      <h3 class="fw-bold">Akota Kinder Garten and<br>Pre-Cadet School</h3>
+      <p class="text-light mb-1">Official Online Result Portal</p>
+      <span class="badge bg-warning text-dark">Academic Year 2026</span>
     </div>
 
-    <script>
-const sheetLinks = {
-  "Play": "https://docs.google.com/spreadsheets/d/e/.../Play.csv?output=csv",
-  "KG": "https://docs.google.com/spreadsheets/d/e/.../KG.csv?output=csv",
-  "1": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSROTJXV9ZhWmxYneB55jsClJ7v2HyRBcfG5Fc7IhE0N4t_XhPgNfbQ1RciNz0LXgx68vUJjB8cMyLW/pub?gid=0&single=true&output=csv",
-  "2": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSROTJXV9ZhWmxYneB55jsClJ7v2HyRBcfG5Fc7IhE0N4t_XhPgNfbQ1RciNz0LXgx68vUJjB8cMyLW/pub?gid=1320148220&single=true&output=csv",
-  "3": "https://docs.google.com/spreadsheets/d/e/.../3.csv?output=csv",
-  "4": "https://docs.google.com/spreadsheets/d/e/.../4.csv?output=csv",
-  "5": "https://docs.google.com/spreadsheets/d/e/.../5.csv?output=csv",
-};
-        const sampleData = {
-            "1": [
-                {roll: "101", name: "Alex Johnson", term: "1st", math: 85, english: 78, science: 92, history: 88, art: 5},
-                {roll: "102", name: "Maria Garcia", term: "1st", math: 2, english: 88, science: 85, history: 90, art: 82},
-                {roll: "103", name: "James Wilson", term: "1st", math: 65, english: 72, science: 68, history: 60, art: 75}
-            ],
-            "2": [
-                {roll: "201", name: "Sarah Miller", term: "1st", math: 90, english: 85, science: 88, history: 92, art: 87},
-                {roll: "202", name: "Robert Brown", term: "1st", math: 78, english: 82, science: 75, history: 80, art: 85}
-            ]
-        };
+    <!-- ===== FORM ===== -->
+    <div class="mb-3">
+      <label class="form-label text-light">Select Class</label>
+      <select id="classSelect" class="form-control">
+        <option value="">-- Select Class --</option>
+        <option value="1">Class 1</option>
+        <option value="2">Class 2</option>
+        <option value="3">Class 3</option>
+        <option value="4">Class 4</option>
+        <option value="5">Class 5</option>
+      </select>
+    </div>
 
-        // Configuration
-        const GEMINI_KEY = "AIzaSyCnvJkVH3KPm-0JNFHI9EUQi8Ot64QIWQ8";
+    <div class="mb-3">
+      <label class="form-label text-light">Exam Term</label>
+      <select id="termSelect" class="form-control">
+        <option value="">-- Select Term --</option>
+        <option value="1st">1st Term</option>
+        <option value="2nd">2nd Term</option>
+        <option value="Final">Final Exam</option>
+      </select>
+    </div>
 
-        // Convert marks to GPA
-        function marksToGPA(mark) {
-            if (mark >= 80) return 4.0;
-            if (mark >= 70) return 3.5;
-            if (mark >= 60) return 3.0;
-            if (mark >= 50) return 2.5;
-            if (mark >= 40) return 2.0;
-            return 0;
-        }
+    <div class="mb-4">
+      <label class="form-label text-light">Roll Number</label>
+      <input type="number" id="rollInput" class="form-control" placeholder="Enter student roll">
+    </div>
 
-        // Generate AI summary
-        async function generateSummary(studentData, performance) {
-            try {
-                // For demo purposes, using a simulated response
-                // In real implementation, you would call the Gemini API
-                const strengths = performance.subjects.filter(s => s.obtained >= 80).map(s => s.subject);
-                const weaknesses = performance.subjects.filter(s => s.obtained < 60).map(s => s.subject);
-                
-                let summary = `Dear ${studentData.name}, your performance in the ${studentData.term} term is `;
-                
-                if (performance.cgpa >= 3.5) {
-                    summary += `outstanding! You achieved a CGPA of ${performance.cgpa} and secured ${performance.position} position in your class. `;
-                } else if (performance.cgpa >= 2.5) {
-                    summary += `good. You achieved a CGPA of ${performance.cgpa} and secured ${performance.position} position in your class. `;
-                } else {
-                    summary += `needs improvement. You achieved a CGPA of ${performance.cgpa} and secured ${performance.position} position in your class. `;
-                }
-                
-                if (strengths.length > 0) {
-                    summary += `Your strengths are in ${strengths.join(", ")}. `;
-                }
-                
-                if (weaknesses.length > 0) {
-                    summary += `You need to focus more on ${weaknesses.join(", ")}. `;
-                }
-                
-                if (performance.cgpa >= 3.5) {
-                    summary += `Keep up the excellent work!`;
-                } else if (performance.cgpa >= 2.5) {
-                    summary += `With a little more effort, you can achieve even better results next term.`;
-                } else {
-                    summary += `We recommend extra practice sessions and consulting with your teachers to improve.`;
-                }
-                
-                // Simulate API delay
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                return summary;
-                
-                // Real API call would look like this:
-                /*
-                const response = await fetch("https://gemini.googleapis.com/v1/models/text-bison-001:generateText", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${GEMINI_KEY}`
-                    },
-                    body: JSON.stringify({ 
-                        prompt: prompt,
-                        temperature: 0.7,
-                        candidateCount: 1,
-                        maxOutputTokens: 300
-                    })
-                });
-                const data = await response.json();
-                return data?.candidates[0]?.content || "Summary not available";
-                */
-            } catch (e) {
-                console.error(e);
-                return "AI analysis is currently unavailable. Please check your connection.";
-            }
-        }
+    <!-- ===== BUTTON ===== -->
+    <button class="btn btn-primary w-100 fw-semibold" onclick="checkResult()">
+      Check Result
+    </button>
+     <!-- ===== RESULT OUTPUT ===== -->
+    <div id="result" class="mt-4"></div>
 
-        // Check result function
-        async function checkResult() {
-            const roll = document.getElementById("roll").value.trim();
-            const classSel = document.getElementById("classSelect").value;
-            const termSel = document.getElementById("termSelect").value;
-            const resultPanel = document.getElementById("resultPanel");
-            const resultContent = document.getElementById("resultContent");
-            const loader = document.getElementById("loader");
-            
-            // Validation
-            if (!roll || !classSel || !termSel) {
-                alert("Please fill in all fields: Roll Number, Class, and Term");
-                return;
-            }
-            
-            // Show result panel and loader
-            resultPanel.style.display = "block";
-            resultContent.style.display = "none";
-            loader.style.display = "flex";
-            
-            // Simulate API call delay
-            setTimeout(async () => {
-                try {
-                    // Find student data
-                    let studentData = null;
-                    const classData = sampleData[classSel];
-                    
-                    if (classData) {
-                        studentData = classData.find(student => 
-                            student.roll === roll && student.term === termSel
-                        );
-                    }
-                    
-                    // If student not found
-                    if (!studentData) {
-                        loader.style.display = "none";
-                        resultContent.style.display = "block";
-                        document.getElementById("studentName").textContent = "Student Not Found";
-                        document.getElementById("studentDetails").textContent = "No record found for the provided details";
-                        document.getElementById("marksTableContainer").innerHTML = 
-                            `<div class="alert alert-warning">No result found for Roll ${roll} in Class ${classSel}, Term ${termSel}</div>`;
-                        document.getElementById("performanceSummary").innerHTML = "";
-                        document.getElementById("aiSummary").textContent = "Please check your details and try again.";
-                        return;
-                    }
-                    
-                    // Calculate performance metrics
-                    const subjects = [
-                        {subject: "Mathematics", obtained: studentData.math, total: 100},
-                        {subject: "English", obtained: studentData.english, total: 100},
-                        {subject: "Science", obtained: studentData.science, total: 100},
-                        {subject: "History", obtained: studentData.history, total: 100},
-                        {subject: "Art", obtained: studentData.art, total: 100}
-                    ];
-                    
-                    let totalMarks = 0;
-                    let totalGPA = 0;
-                    let fail = false;
-                    
-                    subjects.forEach(subject => {
-                        totalMarks += subject.obtained;
-                        totalGPA += marksToGPA(subject.obtained);
-                        if (subject.obtained < 33) fail = true;
-                    });
-                    
-                    const cgpa = (totalGPA / subjects.length).toFixed(2);
-                    const percentage = ((totalMarks / (subjects.length * 100)) * 100).toFixed(1);
-                    
-                    // Calculate position (simulated)
-                    const position = Math.floor(Math.random() * 20) + 1;
-                    
-                    // Update UI
-                    document.getElementById("studentName").textContent = studentData.name;
-                    document.getElementById("studentDetails").textContent = 
-                        `Class: ${classSel} | Term: ${termSel} | Roll: ${roll}`;
-                    
-                    // Status badge
-                    const statusBadge = document.getElementById("statusBadge");
-                    if (fail) {
-                        statusBadge.className = "status-badge status-fail";
-                        statusBadge.textContent = "FAIL";
-                    } else {
-                        statusBadge.className = "status-badge status-pass";
-                        statusBadge.textContent = "PASS";
-                    }
-                    
-                    // Generate marks table
-                    let tableHTML = `
-                        <table class="marks-table">
-                            <thead>
-                                <tr>
-                                    <th>Subject</th>
-                                    <th>Total</th>
-                                    <th>Obtained</th>
-                                    <th>Grade</th>
-                                </tr>
-                            </thead>
-                            <tbody>`;
-                    
-                    subjects.forEach(subject => {
-                        const grade = marksToGPA(subject.obtained);
-                        tableHTML += `
-                            <tr>
-                                <td class="subject-cell">${subject.subject}</td>
-                                <td>${subject.total}</td>
-                                <td><strong>${subject.obtained}</strong></td>
-                                <td>${grade.toFixed(1)}</td>
-                            </tr>`;
-                    });
-                    
-                    tableHTML += `</tbody></table>`;
-                    document.getElementById("marksTableContainer").innerHTML = tableHTML;
-                    
-                    // Generate performance summary
-                    document.getElementById("performanceSummary").innerHTML = `
-                        <div class="metric-card">
-                            <div class="metric-value cgpa">${cgpa}</div>
-                            <div class="metric-label">CGPA</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value position">${position}</div>
-                            <div class="metric-label">Class Position</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value total-marks">${totalMarks}</div>
-                            <div class="metric-label">Total Marks</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value percentage">${percentage}%</div>
-                            <div class="metric-label">Percentage</div>
-                        </div>
-                    `;
-                    
-                    // Generate AI summary
-                    const performance = {
-                        cgpa: parseFloat(cgpa),
-                        position: position,
-                        totalMarks: totalMarks,
-                        percentage: parseFloat(percentage),
-                        subjects: subjects
-                    };
-                    
-                    const aiSummary = await generateSummary(studentData, performance);
-                    document.getElementById("aiSummary").textContent = aiSummary;
-                    
-                    // Hide loader and show content
-                    loader.style.display = "none";
-                    resultContent.style.display = "block";
-                    
-                } catch (error) {
-                    console.error(error);
-                    loader.style.display = "none";
-                    resultContent.style.display = "block";
-                    document.getElementById("marksTableContainer").innerHTML = 
-                        `<div class="alert alert-danger">Error loading result. Please try again.</div>`;
-                }
-            }, 1500); // Simulated delay
-        }
-        
-        // Download result as PDF
-        function downloadResult() {
-            alert("In a real implementation, this would generate and download a PDF of the result.");
-            // Implementation would require a PDF generation library like jsPDF
-        }
-        
-        // Initialize the UI
-        document.addEventListener('DOMContentLoaded', function() {
-            // Show the result panel with a welcome message
-            const resultPanel = document.getElementById("resultPanel");
-            resultPanel.style.display = "block";
-        });
-    </script>
+    <hr>
+<!-- ===== SHOW/HIDE COMPARE SECTION ===== -->
+<div class="mb-3 text-center">
+  <button class="btn btn-warning w-50 fw-semibold" id="showCompareBtn">
+    🔄 Compare Students
+  </button>
+</div>
+<!-- ===== COMPARE SECTION (HIDDEN INITIALLY) ===== -->
+<div id="compareSection" style="display:none;">
+  <hr class="my-4 border-light">
+
+  <h5 class="text-light text-center">Compare Two Students</h5>
+
+  <div class="row mb-2">
+    <div class="col">
+      <input type="number" id="rollCompare1" class="form-control" placeholder="Enter Roll 1">
+    </div>
+    <div class="col">
+      <input type="number" id="rollCompare2" class="form-control" placeholder="Enter Roll 2">
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-success w-100 fw-semibold" onclick="compareStudents()">
+      Compare Students
+    </button>
+  </div>
+
+  <div id="compareResult" class="mt-3"></div>
+</div>
+
+   
+    <!-- ===== FOOTER ===== -->
+    <div class="text-center mt-3">
+      <small class="text-light">
+        © 2026 • Powered by Mehedi Al Hasan Sawon
+      </small>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
