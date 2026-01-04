@@ -186,11 +186,11 @@ async function checkResult() {
           <i class="fas fa-${failStatus ? 'times' : 'check'}"></i> ${status}
         </span>
       </div>
-      
-      <div class="info-row">
-        <span class="badge badge-position">
+      <span class="badge badge-position">
           <i class="fas fa-trophy"></i> Position: ${position}
         </span>
+      <div class="info-row">
+        
         <span class="text-success fw-bold">
           <i class="fas fa-crown"></i> Topper: ${topperName} (Roll ${topperRoll})
         </span>
