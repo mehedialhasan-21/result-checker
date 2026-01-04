@@ -444,11 +444,13 @@ select option {
   background: gold;
   color: black;
   font-weight: bold;
+  margin-top: 0;
   margin-left: 30px;
+  margin-bottom: 10px;
   padding: 6px 14px;
   border-radius: 20px;
   border: 2px solid blue;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 /* =====================
@@ -727,5 +729,42 @@ select option {
   
   .btn-primary, .btn-outline-light, .btn-warning, .btn-success {
     padding: 12px;
+  }
+}
+/* Minimal horizontal scroll for mobile tables */
+
+/* For marksheet table */
+@media (max-width: 991px) {
+  .marksheet table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  
+  .marksheet table thead,
+  .marksheet table tbody,
+  .marksheet table tfoot {
+    display: table;
+    width: 100%;
+    min-width: 600px;
+  }
+}
+
+/* For compare table */
+@media (max-width: 991px) {
+  .compare-card table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  
+  .compare-card table thead,
+  .compare-card table tbody,
+  .compare-card table tfoot {
+    display: table;
+    width: 100%;
+    min-width: 800px;
   }
 }
