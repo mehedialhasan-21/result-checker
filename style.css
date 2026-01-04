@@ -1,0 +1,731 @@
+/* =====================
+   GLOBAL
+===================== */
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --secondary: #06b6d4;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+  --light: #f8fafc;
+  --dark: #0f172a;
+  --dark-light: #1e293b;
+  --glass-bg: rgba(15, 23, 42, 0.85);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  min-height: 100vh;
+  color: var(--light);
+}
+
+/* =====================
+   CONTAINER (DESKTOP ONLY PADDING)
+===================== */
+@media (min-width: 992px) {
+  .container {
+    padding: 20px 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+/* =====================
+   RESULT CARD (GLASS)
+===================== */
+.result-card {
+  border: none;
+  animation: slideUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Desktop padding */
+@media (min-width: 992px) {
+  .result-card {
+    padding: 30px;
+  }
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================
+   HEADER
+===================== */
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+/* Mobile header adjustments */
+@media (max-width: 991px) {
+  .header {
+    margin-bottom: 20px;
+    padding: 0 15px;
+  }
+  
+  .header h3 {
+    font-size: 1.9rem !important;
+    line-height: 1.3;
+  }
+}
+
+.header h3 {
+  font-weight: 700;
+  font-size: 1.9rem;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.header p {
+  font-weight: 300;
+  opacity: 0.9;
+  margin-bottom: 15px;
+}
+
+.badge-academic {
+  background: linear-gradient(90deg, #f59e0b, #f97316);
+  border: none;
+  font-weight: 600;
+  padding: 8px 20px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+}
+
+/* =====================
+   FORM CONTROLS
+===================== */
+.form-label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-label i {
+  color: var(--secondary);
+}
+
+.form-control, select {
+  border-radius: 14px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+/* Mobile form spacing */
+@media (max-width: 991px) {
+  .form-control, select {
+    padding: 12px 15px;
+  }
+  
+  .mb-4 {
+    margin-bottom: 15px !important;
+    padding: 0 15px;
+  }
+}
+
+.form-control::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-control:focus, select:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.4);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--primary);
+  color: white;
+  outline: none;
+}
+
+select option {
+  background: var(--dark-light);
+  color: white;
+  padding: 10px;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border: none;
+  padding: 16px;
+  border-radius: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+/* Mobile button spacing */
+@media (max-width: 991px) {
+  .btn-primary, .btn-outline-light, .btn-warning, .btn-success, .btn-danger {
+    padding: 14px;
+    margin: 0 15px;
+    width: calc(100% - 30px) !important;
+  }
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+}
+
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, var(--warning), #eab308);
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, var(--success), #059669);
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, var(--danger), #dc2626);
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* =====================
+   ALERTS
+===================== */
+.alert {
+  border-radius: 14px;
+  border: none;
+  padding: 16px;
+  font-weight: 500;
+}
+
+.alert-dismissible .btn-close {
+  filter: brightness(0) invert(1);
+}
+
+/* =====================
+   MARKSHEET
+===================== */
+.marksheet {
+  font-family: Monospace;
+  background: white;
+  color: var(--dark);
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Mobile marksheet adjustments */
+@media (max-width: 991px) {
+  .marksheet {
+    margin: 0 10px;
+    padding: 15px !important;
+    border-radius: 15px;
+  }
+}
+
+.marksheet::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--secondary));
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.marksheet h4 {
+  font-weight: 700;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+/* Mobile heading adjustments */
+@media (max-width: 991px) {
+  .marksheet h4 {
+    font-size: 1.2rem;
+  }
+  
+  .marksheet h5 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+}
+
+.marksheet h5 {
+  font-weight: 600;
+  color: var(--danger);
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #e0e7ff;
+  padding-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+/* =====================
+   STUDENT INFO
+===================== */
+.student-info {
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border-left: 4px solid var(--primary);
+}
+
+@media (max-width: 991px) {
+  .student-info {
+    padding: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .student-info p {
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+}
+
+.student-info p {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
+
+.student-info b {
+  color: var(--dark);
+  min-width: 140px;
+  display: inline-block;
+}
+
+/* =====================
+   INFO ROWS
+===================== */
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 14px;
+  margin-bottom: 25px;
+  padding: 18px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .info-row {
+    padding: 12px;
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+  
+  .info-row span {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
+
+.info-row span {
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.info-row span b {
+  color: var(--primary);
+}
+
+/* =====================
+   STATUS BADGES
+===================== */
+.badge-status {
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.badge-pass {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--success);
+}
+
+.badge-fail {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--danger);
+}
+
+.badge-position {
+  background: gold;
+  color: black;
+  font-weight: bold;
+  margin-left: 30px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid blue;
+  font-size: 15px;
+}
+
+/* =====================
+   TABLE
+===================== */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  font-size: 15px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 991px) {
+  .table {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+  
+  .table th, .table td {
+    padding: 10px 8px !important;
+  }
+}
+
+.table th {
+  background: #e0e7ff;
+  color: #1e293b;
+  text-align: center;
+  font-weight: 600;
+  padding: 14px;
+  border-bottom: 2px solid #c7d2fe;
+}
+
+.table td {
+  text-align: center;
+  padding: 14px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* =====================
+   TABLE FOOTER
+===================== */
+.table tfoot tr {
+  background: #eef2ff;
+  font-weight: 700;
+}
+
+.table tfoot th {
+  background: #d1d9ff;
+  font-size: 16px;
+}
+
+/* =====================
+   GPA & PERCENTAGE
+===================== */
+.gpa-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-size: 17px;
+  padding: 18px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .gpa-row {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 15px;
+    margin-top: 15px;
+    font-size: 15px;
+  }
+}
+
+.gpa-row span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+}
+
+.gpa-pass {
+  color: var(--success);
+}
+
+.gpa-fail {
+  color: var(--danger);
+}
+
+/* =====================
+   FOOTER ROW
+===================== */
+.footer-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+  font-size: 14px;
+  color: #64748b;
+  border-top: 1px solid #e2e8f0;
+  padding-top: 20px;
+}
+
+@media (max-width: 991px) {
+  .footer-row {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    font-size: 13px;
+  }
+}
+
+.footer-row span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* =====================
+   COMPARE SECTION
+===================== */
+#compareSection {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 18px;
+  padding: 25px;
+  margin-top: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.4s ease;
+}
+
+@media (max-width: 991px) {
+  #compareSection {
+    padding: 15px;
+    margin: 0 10px;
+    margin-top: 20px;
+  }
+  
+  .compare-card {
+    padding: 15px !important;
+  }
+}
+
+.compare-card {
+  background: white;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  animation: slideUp 0.4s ease;
+}
+
+.compare-card h6 {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.compare-table th {
+  background: #eef2ff;
+  text-align: center;
+  font-weight: 600;
+}
+
+.compare-table td {
+  text-align: center;
+  font-weight: 500;
+}
+
+.table-success {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+}
+
+.table-danger {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+}
+
+/* =====================
+   PRINT STYLES
+===================== */
+@media print {
+  body {
+    background: white;
+    padding: 0;
+    color: black;
+    margin: 0;
+    gap: 0;
+  }
+  
+  .result-card {
+    box-shadow: none;
+    background: white;
+    color: black;
+    max-width: 100%;
+    padding: 0;
+    border: none;
+    margin: 0;
+  }
+  
+  .result-card::before {
+    display: none;
+  }
+  
+  .btn,.Official, .mb-3, .mb-4, #compareSection, hr, .header .badge{
+    display: none !important;
+  }
+  .header h3 {
+    display:none;
+  }
+  
+  .marksheet {
+    box-shadow: none;
+    padding: 0;
+    border: 1px solid #ddd;
+    margin: 0;
+  }
+  
+  .marksheet::before {
+    display: none;
+  }
+  
+  .table {
+    box-shadow: none;
+  }
+}
+
+/* =====================
+   LOADING SPINNER
+===================== */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 576px) {
+  .header h3 {
+    font-size: 1.9rem;
+  }
+  
+  .info-row {
+    gap: 8px;
+    padding: 10px;
+  }
+  
+  .info-row span {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .student-info b {
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  .header h3 {
+    font-size: 1.9rem;
+  }
+  
+  .form-control, select {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+  
+  .btn-primary, .btn-outline-light, .btn-warning, .btn-success {
+    padding: 12px;
+  }
+}
